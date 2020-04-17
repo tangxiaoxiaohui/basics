@@ -2,7 +2,7 @@ import Queue from 'js-queue'
 
 export default class FunctionQueue {
   constructor (consumer) {
-    this.consumer = consumer
+    this.consumer = consumer;
     this.queue = new Queue()
   }
 
@@ -19,7 +19,7 @@ export default class FunctionQueue {
   }
 
   _consumer (obj) {
-    this.consumer(obj)
+    this.consumer(obj);
     setTimeout(this.queue.next.bind(this))
   }
 }

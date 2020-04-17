@@ -7,12 +7,12 @@ import { getToken } from './token.js'
 import { putMessage } from './notice.js'
 import { toClientLogin } from './redirect'
 
-const { API_BASE_URL, API_PROTOCAL, NOT_INTERCEPT_API } = API_CONFIG
+const { API_BASE_URL, NOT_INTERCEPT_API } = API_CONFIG
 
 // 创建一个请求实例
 const service = axios.create({
   // api的base_url
-  baseURL: API_BASE_URL + API_PROTOCAL,
+  baseURL: API_BASE_URL,
   // 请求超时设置
   timeout: 40000
   // 请求数据修改器
@@ -27,7 +27,7 @@ service.interceptors.request.use(async config => {
   const token = getToken()
 
   // 初始化请求头
-  config.headers.client = CLIENT
+  config.headers.client = CLIENT;
   if (!_.isEmpty(token)) {
     initHeaders(config, token)
   } else if (!NOT_INTERCEPT_API.includes(config.url)) {

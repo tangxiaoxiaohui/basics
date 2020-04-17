@@ -3,11 +3,11 @@ import Vuex from 'vuex'
 
 import account from './module/account'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {},
   modules: {
-    account
+    account,
   }
 })

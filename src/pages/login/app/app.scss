@@ -1,0 +1,119 @@
+@import "../../../assets/style/config";
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  .login-body{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .company-profile{
+      width: 538px;
+      .company-name,
+      .company-explain{
+        color: #FFFFFF;
+      }
+      .company-name{
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .line{
+        @include line($color: #FFFFFF, $height: 3px, $width: 60px);
+        margin-bottom: 20px;
+      }
+      .company-explain{
+        font-size: 16px;
+        margin-bottom: 55px;
+      }
+      .company-big-img .img{
+        width: 382px;
+        height: 382px;
+      }
+    }
+    .landing-module{
+      width: 362px;
+      min-width: 362px;
+      background-color: #FFFFFF;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .company-logo .img{
+        min-width: 84px;
+        max-width: 100%;
+        min-height: 84px;
+        max-height: 84px;
+      }
+      .login-type{
+        font-size: 16px;
+        margin-bottom: 36px;
+        .client,.serve{
+          display: inline-block;
+          margin: 0 20px;
+          &.active{
+            color: $success;
+            @include box_border_line($border: bottom, $color: $success, $height: 2px, $width: 64px, $distance: 5px);
+          }
+        }
+      }
+      $width: 301px;
+      .placeholder{
+        height: 42px;
+        margin-bottom: 20px;
+      }
+      .username,.password,.verification{
+        width: $width;
+        height: 42px;
+        background-color: #F5F5F5;
+        margin-bottom: 20px;
+        @include set_flex($item: center);
+        .icon{
+          font-size: 30px;
+          margin: 0 8px 0 12px;
+        }
+        .input {
+          flex: 1px;
+          border: none;
+          outline: none;
+          height: 20px;
+          background-color: transparent;
+          font-size: 14px;
+          &::placeholder {
+            color: #BDBEC4;
+            font-size: 14px;
+          }
+          &:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #F5f5f5 inset !important;
+          }
+        }
+        .img{
+          width: 88px;
+          height: 40px;
+          background-color: #FFFFFF;
+          margin-right: 1px;
+        }
+      }
+      .remember-password,
+      .to-login{
+        width: $width;
+      }
+      .remember-password{
+        margin-bottom: 20px;
+      }
+      .to-login .button{
+        height: 42px;
+        width: 100%;
+        background-color: $success;
+      }
+    }
+  }
+  .login-foot{
+    flex: 0 0 50px;
+  }
+}

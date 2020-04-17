@@ -1,12 +1,12 @@
-import { COMMON_HOLDER, COMMON_RESPONSE } from './commonResponse'
+import {COMMON_HOLDER, COMMON_RESPONSE} from './socketResponse'
 
-import webSocket from 'webSocket'
+import webSocket from 'Socket/webSocket'
 import FunctionQueue from 'Lib/functionQueue'
 
 // 获取 webSocket 唯一id
-let seq = 1
+let seq = 1;
 
-function getSeq () {
+function getSeq() {
   return seq++
 }
 
@@ -17,19 +17,21 @@ function getSeq () {
  * @param callback 回调事件
  * @returns {boolean}
  */
-export function runRequestEvent ({ data, params, callback }) {
-  const seq = getSeq()
-  params.seq = seq
-  const cmdType = params.cmdType
-  // webSocket 请求注册
-  COMMON_HOLDER[seq] = {
-    cmdType,
-    data,
-    params: params,
-    callback,
-    requestTime: Date.now()
+export function runRequestEvent({data, params, callback}) {
+  const seq = getSeq();
+  params.seq = seq;
+  const cmdType = params.cmdType;
+  if (callback) {
+    // webSocket 请求注册
+    COMMON_HOLDER[seq] = {
+      cmdType,
+      data,
+      params: params,
+      callback,
+      requestTime: Date.now()
+    };
   }
-  webSocket.sendMessage(JSON.stringify(params))
+  webSocket.sendMessage(JSON.stringify(params));
   return true
 }
 
@@ -37,10 +39,10 @@ export function runRequestEvent ({ data, params, callback }) {
  * 执行 socket 回执 事件
  * @param event
  */
-function responseEvent (event) {
+function responseEvent(event) {
   try {
-    const response = JSON.parse(event.data)
-    const { cmdType } = response
+    const response = JSON.parse(event.data);
+    const {cmdType} = response;
     COMMON_RESPONSE[cmdType] && COMMON_RESPONSE[cmdType](response)
   } catch (e) {
     // todo webSocket 消息处理失败
@@ -48,12 +50,12 @@ function responseEvent (event) {
 }
 
 // 函数队列
-const queue = new FunctionQueue(responseEvent)
+const queue = new FunctionQueue(responseEvent);
 
 /**
  * socket 回执 事件 放入队列
  * @param event
  */
-export function runResponseEvent (event) {
+export function runResponseEvent(event) {
   queue.add(event)
 }

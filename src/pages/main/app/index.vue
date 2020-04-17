@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    主页
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App',
-  components: {}
-}
-</script>
+  import app from './app'
 
+  export default {
+    name: 'App',
+    components: {
+    },
+    ...app
+  }
+</script>
 <style lang="scss">
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -18,6 +20,6 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
 </style>
+<style src="./app.scss" lang="scss"></style>

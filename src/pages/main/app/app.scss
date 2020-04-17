@@ -1,0 +1,49 @@
+@import "../../../assets/style/config";
+
+#app{
+  height: 100VH;
+  @include set_flex($direction: column);
+  .app-header{
+    flex: 0 0 60px;
+    margin: 0 30px;
+    @include set_flex($item: center,$justify: space-between);
+    @include box_border_line($color: #666666);
+    .user-name,
+    .expiration-time,
+    .app-versions,
+    .logs,
+    .dy-versions,
+    .account-versions {
+      border-radius: 2px;
+      padding: 2px 6px;
+      @extend %default-box-shadow;
+    }
+  }
+  .app-body{
+    flex: 1;
+    margin: 0 30px;
+    @include set_flex;
+    .app-navigation{
+      flex: 0 0 200px;
+      margin: 30px 0;
+      @include set_flex($direction: column,$justify: space-between,$item: center);
+      .nav{
+        cursor: pointer;
+        flex: 0 0 50px;
+        line-height: 50px;
+        text-align: center;
+        width: calc(180px);
+        @extend %default-box-shadow;
+        &.active {
+          background-color: $primary;
+        }
+      }
+    }
+    .app-content{
+      flex: 1;
+      min-height: 0;
+      min-width: 0;
+      margin: 10px 0;
+    }
+  }
+}

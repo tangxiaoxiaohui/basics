@@ -3,7 +3,7 @@ let baseApi, // api基础访问地址
 
 // 初始化域名
 if (host === 'localhost' || host === '192.168.1.103') {
-  host = '192.168.1.99';
+  host = '192.168.1.96';
 } else {
   host = location.host.split(':')[0];
 }

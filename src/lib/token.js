@@ -1,17 +1,16 @@
-import apiLogin from '@api/login'
+import {refreshToken} from 'Api/login'
 
-const clientTokenKey = 'client-token' // 客户端 token key
-// eslint-disable-next-line no-unused-vars
-const ServerTokenKey = 'admin-token' // 服务端 token key
+const clientTokenKey = 'client-token'; // 客户端 token key
+const ServerTokenKey = 'admin-token'; // 服务端 token key
 
-const PERSIST_KEY = 'persist_key'
+const PERSIST_KEY = 'persist_key';
 
 /**
  * 获取token
  * @returns {string}
  */
 export function getToken () {
-  let token = localStorage.getItem(clientTokenKey)
+  let token = localStorage.getItem(clientTokenKey);
   try {
     token = JSON.parse(token)
   } catch (e) {
@@ -55,11 +54,11 @@ export function removeToken () {
 /**
  * 刷新token
  */
-export async function refreshToken () {
+export async function refreshCurrentToken () {
   setInterval(async function () {
     const token = getToken()
-    const refreshTokenResult = await apiLogin.refreshToken(token.refresh_token)
-    refreshTokenResult.expires_time = Date.now() + (refreshTokenResult.expires_in - 120) * 1000
+    const refreshTokenResult = await refreshToken(token.refresh_token);
+    refreshTokenResult.expires_time = Date.now() + (refreshTokenResult.expires_in - 120) * 1000;
     saveToken(refreshTokenResult)
   }, 1000 * 60 * 29)
 }

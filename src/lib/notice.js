@@ -46,13 +46,15 @@ export async function confirmMessage ({ content, title, confirmButtonText, cance
  * @param title 提示标题
  * @param confirmButtonText 确认按钮文案
  * @param cancelButtonText 取消按钮文案
+ * @param inputValue 输入框的初始文本
  * @param resolve 确认回调函数
  * @param reject 取消回调函数
  * @returns {Promise<*>}
  */
-export async function promptMessage ({ content, title, confirmButtonText, cancelButtonText, resolve, reject }) {
+export async function promptMessage ({ content, title, confirmButtonText, cancelButtonText, inputValue, resolve, reject }) {
   return await prompt(content, title || '提示', {
     confirmButtonText: confirmButtonText || '确定',
-    cancelButtonText: cancelButtonText || '取消'
+    cancelButtonText: cancelButtonText || '取消',
+    inputValue,
   }).then(resolve ? ({ value }) => resolve() || value : returnValue, reject ? () => reject() && null : returnNull)
 }

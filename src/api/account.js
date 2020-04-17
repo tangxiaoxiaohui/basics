@@ -1,4 +1,8 @@
 import request from 'Lib/request'
+import {API_CONFIG} from 'Public/app.config';
+
+// api前缀
+const {API_PROTOCAL} = API_CONFIG;
 
 /**
  * 获取用户信息
@@ -6,7 +10,7 @@ import request from 'Lib/request'
  */
 export async function getUserInfo () {
   return request({
-    url: '/account/self',
+    url: API_PROTOCAL + '/account/self',
     method: 'get'
   })
 }
@@ -17,7 +21,7 @@ export async function getUserInfo () {
  */
 export async function listMyDepartmentAccountsForTransfer () {
   return request({
-    url: '/account/myDepartmentAccountsForTransfer',
+    url: API_PROTOCAL + '/account/myDepartmentAccountsForTransfer',
     method: 'get'
   })
 }
@@ -28,7 +32,7 @@ export async function listMyDepartmentAccountsForTransfer () {
  */
 export async function listMyTenantAllAccounts () {
   return request({
-    url: '/account/myTenantAllAccounts',
+    url: API_PROTOCAL + '/account/myTenantAllAccounts',
     method: 'get'
   })
 }

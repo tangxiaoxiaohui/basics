@@ -21,10 +21,10 @@ class accountService {
    */
   async init () {
     // 初始化当前账号
-    const { account, privilegeFrags, tenant } = await getUserInfo()
-    this.account = account || []
-    this.privilegeFrags = privilegeFrags || {}
-    this.tenant = tenant || {}
+    const { account, privilegeFrags, tenant } = await getUserInfo();
+    this.account = account || [];
+    this.privilegeFrags = privilegeFrags || {};
+    this.tenant = tenant || {};
 
     // 设置账号信息
     Store.commit('ACCOUNT_CHANGE', account)

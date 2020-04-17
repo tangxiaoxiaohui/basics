@@ -1,0 +1,172 @@
+/* 函数 */
+
+/**
+ flex设置
+ $direction: 指定了弹性容器中子元素的排列方式
+ $justify: 设置弹性盒子元素在主轴（横轴）方向上的对齐方式。
+ $item: 设置弹性盒子元素在侧轴（纵轴）方向上的对齐方式。
+ */
+@mixin set_flex($direction: row,$justify: flex-start,$item: stretch,$wrap: nowrap){
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $item;
+  flex-wrap: $wrap
+}
+
+/**
+  块衡线
+  $color: 颜色, $height: 高度, $width: 宽度
+  */
+@mixin line($color: black, $height: 1px, $width: 100%){
+  display: block;
+  background-color: $color;
+  height: $height;
+  width: $width;
+}
+
+/**
+ 盒子外部边框线
+ $border: 边框方向, $color: 颜色, $height: 高度, $width: 宽度, $distance: 距离
+ */
+@mixin box_border_line($border: bottom, $color: black, $height: 1px, $width: 100%, $distance: 0px){
+  position: relative;
+  @if $border == bottom or $border == top{
+    &::after{
+      content: '';
+      display: block;
+      position: absolute;
+      #{$border}: -$distance;
+      background-color: $color;
+      height: $height;
+      width: $width;
+      left: 0;
+    }
+  }
+  @if $border == left or $border == right{
+    &::after{
+      content: '';
+      display: block;
+      position: absolute;
+      #{$border}: -$distance;
+      background-color: $color;
+      width: $height;
+      height: $width;
+      top: 0;
+    }
+  }
+}
+
+/* 隐藏滚动条 */
+@mixin hide_soccer{
+  overflow: hidden;
+  .soccer-wrap{
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-right: -6px;
+  }
+}
+
+/* 角标 */
+@mixin corner_marker($direction: left,$color: #FFFFFF,$height: 6,$move_direction: top,$move_width: 12){
+  position: relative;
+  &::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: $height+px solid transparent;
+    #{$move_direction}: ($move_width)+px;
+    #{$direction}: -($height*2)+px;
+    @if $direction == 'left'{
+      border-right-color: $color;
+    }
+    @if $direction == 'right'{
+      border-left-color: $color;
+    }
+    @if $direction == 'top'{
+      border-bottom-color: $color;
+    }
+    @if $direction == 'bottom'{
+      border-top-color: $color;
+    }
+  }
+}
+
+/* 文本过长... */
+@mixin text_overflow($maxWidth: false){
+  white-space: nowrap;
+  min-width: 0;
+  @if $maxWidth {
+    max-width: $maxWidth;
+  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 多行文本溢出 */
+@mixin more_line_text_overflow($line: 3){
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+/* 文本框自适应宽 */
+@mixin inputAutoWidth($min-width: 0px, $max-width: 100%){
+  position: relative;
+  min-width: $min-width;
+  max-width: $max-width;
+  color: transparent;
+  white-space: nowrap;
+  background-color: transparent;
+  font: 400 1em Microsoft YaHei;
+  input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    min-height: 1.4em;
+    border: none;
+    outline: none;
+    padding: 0;
+    background-color: transparent;
+    font: 400 1em Microsoft YaHei;
+  }
+}
+
+/* 文本域自适应高 */
+@mixin textareaAutoHeight($width: 100%){
+  position: relative;
+  display: flex;
+  width: $width;
+  color: transparent;
+  background-color: transparent;
+  min-height: 1.5em;
+  span{
+    display: inline-block;
+    flex: 1;
+    min-height: 1.5em;
+    word-break: break-word;
+    font: 400 1em Microsoft YaHei;
+  }
+  textarea{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    background-color: transparent;
+    font: 400 1em Microsoft YaHei;
+  }
+}

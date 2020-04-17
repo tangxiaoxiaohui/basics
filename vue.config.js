@@ -37,14 +37,16 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('src'))
       .set('Public', resolve('public'))
+      .set('Assets', resolve('src/assets'))
       .set('Api', resolve('src/api'))
       .set('Config', resolve('src/config'))
-      .set('Views', resolve('src/views'))
+      .set('Service', resolve('src/service'))
+      .set('Pages', resolve('src/pages'))
       .set('Components', resolve('src/components'))
       .set('Store', resolve('src/store'))
       .set('Static', resolve('src/static'))
       .set('Lib', resolve('src/lib'))
-      .set('Service', resolve('src/service'))
+      .set('Socket', resolve('src/socket'))
       .set('Utils', resolve('src/utils'))
   },
 };
